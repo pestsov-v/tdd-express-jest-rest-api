@@ -4,9 +4,10 @@
   "description": "test driven development practice",
   "main": "app.js",
   "scripts": {
-    "dev:server": "node app.js",
+    "dev:server": "nodemon app.js",
     "jest:test": "jest --watch",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "http:server": "http-server -c-1 -p 8080 -P http://localhost:3000"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,9 @@
   },
   "homepage": "https://github.com/AveselsJS/tdd-practice#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "http-server": "^14.0.0",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "eslint": "^7.2.0",
