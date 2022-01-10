@@ -4,7 +4,7 @@
   "description": "test driven development practice",
   "main": "app.js",
   "scripts": {
-    "dev:server": "nodemon app.js",
+    "dev:server": "nodemon index.js",
     "jest:test": "jest --watch",
     "lint": "eslint . --fix",
     "http:server": "http-server -c-1 -p 8080 -P http://localhost:3000"
