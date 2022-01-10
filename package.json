@@ -20,9 +20,12 @@
   },
   "homepage": "https://github.com/AveselsJS/tdd-practice#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.2",
     "http-server": "^14.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.12.5",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "eslint": "^7.2.0",
@@ -34,7 +37,7 @@
   },
   "eslintConfig": {
     "parserOptions": {
-      "ecmaVersion": 6
+      "ecmaVersion": 2018
     },
     "extends": [
       "eslint:recommended",
