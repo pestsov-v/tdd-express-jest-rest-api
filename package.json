@@ -1,0 +1,27 @@
+{
+  "name": "tdd-practice",
+  "version": "1.0.0",
+  "description": "test driven development practice",
+  "main": "app.js",
+  "scripts": {
+    "dev:server": "node app.js",
+    "jest:test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AveselsJS/tdd-practice.git"
+  },
+  "author": "Vladislav Pestsov <vladislav.pestsov@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AveselsJS/tdd-practice/issues"
+  },
+  "homepage": "https://github.com/AveselsJS/tdd-practice#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7",
+    "supertest": "^6.1.6"
+  }
+}
