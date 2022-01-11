@@ -211,7 +211,7 @@ describe('Internationalization', () => {
     ${'password'} | ${'lowerandUPPER'} | ${password_pattern}
     ${'password'} | ${'lower4444'}     | ${password_pattern}
     ${'password'} | ${'UPPER4444'}     | ${password_pattern}
-  `('returns $expectedMessage when $field is $value', async ({ field, expectedMessage, value }) => {
+  `('returns "$expectedMessage" when "$field" is "$value"', async ({ field, expectedMessage, value }) => {
     const user = {
       username: 'user1',
       email: 'user1@mail.com',
@@ -224,13 +224,13 @@ describe('Internationalization', () => {
     expect(body.validationErrors[field]).toBe(expectedMessage);
   });
 
-  it(`returns ${email_in_use} when same email is already in use and language is set as Russian`, async () => {
+  it(`returns "${email_in_use}" when same email is already in use and language is set as Russian`, async () => {
     await User.create({ ...validUser });
     const response = await postUser();
     expect(response.body.validationErrors.email).toBe(email_in_use);
   });
 
-  it(`returns success message of ${user_create_success} when signup request is valid and language is set as Russian`, async () => {
+  it(`returns success message of "${user_create_success}" when signup request is valid and language is set as Russian`, async () => {
     const response = await postUser();
     expect(response.body.message).toBe(user_create_success);
   });
