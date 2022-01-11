@@ -1,37 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('./userService');
+const { check, validationResult } = require('express-validator');
 
-const validateUsername = (req, res, next) => {
-  const user = req.body;
+router.post(
+  '/api/v1/users',
+  check('username').notEmpty().withMessage('Username cannot be null'),
+  check('email').notEmpty().withMessage('Email cannot be null'),
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  if (user.username === null) {
-    req.validationErrors = {
-      username: 'Username cannot be null',
-    };
+    if (!errors.isEmpty()) {
+      const validationErrors = {};
+
+      errors.array().forEach((error) => (validationErrors[error.param] = error.msg));
+      return res.status(400).send({ validationErrors: validationErrors });
+    }
+    await userService.save(req.body);
+    return res.status(200).send({ message: 'user created' });
   }
-  next();
-};
-
-const validateEmail = (req, res, next) => {
-  const user = req.body;
-
-  if (user.email === null) {
-    req.validationErrors = {
-      ...req.validationErrors,
-      email: 'Email cannot be null',
-    };
-  }
-  next();
-};
-
-router.post('/api/v1/users', validateUsername, validateEmail, async (req, res) => {
-  if (req.validationErrors) {
-    const response = { validationErrors: { ...req.validationErrors } };
-    return res.status(400).send(response);
-  }
-  await userService.save(req.body);
-  return res.status(200).send({ message: 'user created' });
-});
+);
 
 module.exports = router;
