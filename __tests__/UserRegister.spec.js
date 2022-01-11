@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../src/app');
 const User = require('../src/user/userModel');
 const sequelize = require('../src/config/database');
+const nodemailerStub = require('nodemailer-stub');
 
 beforeAll(() => {
   return sequelize.sync();
@@ -144,6 +145,39 @@ describe('User Registration', () => {
     const body = response.body;
     expect(Object.keys(body.validationErrors)).toEqual(['username', 'email']);
   });
+
+  it('creates user in inactive mode', async () => {
+    await postUser();
+    const users = await User.findAll();
+    const savedUser = users[0];
+    expect(savedUser.inactive).toBe(true);
+  });
+
+  it('creates user in inactive mode even the request body containers inactive a false', async () => {
+    const newUser = { ...validUser, inactive: false };
+    await postUser(newUser);
+    const users = await User.findAll();
+    const savedUser = users[0];
+    expect(savedUser.inactive).toBe(true);
+  });
+
+  it('creates an activationToken for user', async () => {
+    await postUser();
+    const users = await User.findAll();
+    const savedUser = users[0];
+    expect(savedUser.activationToken).toBeTruthy();
+  });
+
+  it('sends an account activation email with activationToken', async () => {
+    await postUser();
+    const lastMail = nodemailerStub.interactsWithMail.lastMail();
+    expect(lastMail.to[0]).toBe('user1@mail.com');
+
+    const users = await User.findAll();
+    const savedUser = users[0];
+
+    expect(lastMail.content).toContain(savedUser.activationToken);
+  });
 });
 
 describe('Internationalization', () => {
@@ -159,7 +193,7 @@ describe('Internationalization', () => {
   const password_size = 'Пароль должен быть не короче 6 символов';
   const password_pattern = 'Пароль должен иметь: 1 символ в нижнем регистре, 1 символ в верхнем регистре и 1 цифру';
   const email_in_use = 'Такой email уже используется';
-
+  const user_create_success = 'Пользователь создан';
   it.each`
     field         | value              | expectedMessage
     ${'username'} | ${null}            | ${username_null}
@@ -190,9 +224,14 @@ describe('Internationalization', () => {
     expect(body.validationErrors[field]).toBe(expectedMessage);
   });
 
-  it(`returns ${email_in_use} when same email is already in use`, async () => {
+  it(`returns ${email_in_use} when same email is already in use and language is set as Russian`, async () => {
     await User.create({ ...validUser });
     const response = await postUser();
     expect(response.body.validationErrors.email).toBe(email_in_use);
+  });
+
+  it(`returns success message of ${user_create_success} when signup request is valid and language is set as Russian`, async () => {
+    const response = await postUser();
+    expect(response.body.message).toBe(user_create_success);
   });
 });
