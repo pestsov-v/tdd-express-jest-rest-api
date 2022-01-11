@@ -1,6 +1,7 @@
 const User = require('./userModel');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const emailService = require('../email/emailService');
 
 const generateToken = (length) => {
   return crypto.randomBytes(length).toString('hex').substring(0, length);
@@ -13,6 +14,7 @@ const save = async (body) => {
 
     const user = { username: username, email: email, password: hash, activationToken: generateToken(16) };
     await User.create(user);
+    await emailService.sendAccountActivation(email, user.activationToken);
   } catch (e) {
     console.log(e);
   }
