@@ -7,6 +7,7 @@ router.post(
   '/api/v1/users',
   check('username').notEmpty().withMessage('Username cannot be null'),
   check('email').notEmpty().withMessage('Email cannot be null'),
+  check('password').notEmpty().withMessage('Password cannot be null'),
   async (req, res) => {
     const errors = validationResult(req);
 
