@@ -1,10 +1,17 @@
 {
-    "database": {
-        "database": "hoaxify",
-        "username": "my-db-user",
-        "password": "db-password",
-        "dialect": "sqlite",
-        "storage": ":memory:",
-        "logging": false
+  "database": {
+    "database": "hoaxify",
+    "username": "my-db-user",
+    "password": "db-password",
+    "dialect": "sqlite",
+    "storage": ":memory:",
+    "logging": false
+  },
+  "mail": {
+    "host": "localhost",
+    "port": 8587,
+    "tls": {
+      "rejectUnauthorized": false
     }
+  }
 }
