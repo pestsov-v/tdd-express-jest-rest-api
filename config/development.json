@@ -1,10 +1,18 @@
 {
-    "database": {
-        "database": "hoaxify",
-        "username": "my-db-user",
-        "password": "db-password",
-        "dialect": "sqlite",
-        "storage": "./database.sqlite",
-        "logging": false
+  "database": {
+    "database": "hoaxify",
+    "username": "my-db-user",
+    "password": "db-password",
+    "dialect": "sqlite",
+    "storage": "./database.sqlite",
+    "logging": false
+  },
+  "mail": {
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "auth": {
+      "user": "layne.leuschke18@ethereal.email",
+      "pass": "hFH2uH2dXsqE2wHSgK"
     }
+  }
 }

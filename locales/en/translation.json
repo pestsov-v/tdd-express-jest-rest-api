@@ -7,5 +7,8 @@
     "password_size": "Password must be at least 6 chatacters",
     "password_pattern": "Password must have at least 1 uppercase, 1 lowercase letter and 1 number",
     "email_in_use": "Email in use",
-    "user_create_success": "User created"
+    "user_create_success": "User created",
+    "email_failure": "Email failure",
+    "account_activation_failure": "This account is either active or the token is invalid",
+    "account_activation_success": "Account is activated"
 }

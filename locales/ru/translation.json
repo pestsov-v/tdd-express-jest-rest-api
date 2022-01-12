@@ -7,5 +7,8 @@
     "password_size": "Пароль должен быть не короче 6 символов",
     "password_pattern": "Пароль должен иметь: 1 символ в нижнем регистре, 1 символ в верхнем регистре и 1 цифру",
     "email_in_use": "Такой email уже используется",
-    "user_create_success": "Пользователь создан"
+    "user_create_success": "Пользователь создан",
+    "email_failure": "Email не был отправлен",
+    "account_activation_failure": "Этот аккаунт был ранее активирован или токен больше не действителен",
+    "account_activation_success": "Акаунт активирован"
 }
