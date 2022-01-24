@@ -43,8 +43,13 @@ const findByEmail = async (email) => {
 };
 
 const getUsers = async () => {
+  const users = await User.findAll({
+    where: { inactive: false },
+    attributes: ['id', 'username', 'email'],
+    limit: 10,
+  });
   return {
-    content: [],
+    content: users,
     page: 0,
     size: 10,
     totalPages: 0,
