@@ -360,8 +360,6 @@ describe('Account activation', () => {
         .set('Accept-Language', language)
         .send();
 
-      console.log(message);
-
       expect(response.body.message).toBe(message);
     }
   );
