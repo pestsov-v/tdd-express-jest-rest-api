@@ -21,6 +21,7 @@ i18next
     },
   });
 
+/// refacto
 const app = express();
 
 app.use(express.json());
