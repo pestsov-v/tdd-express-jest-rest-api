@@ -11,5 +11,6 @@
     "email_failure": "Email не был отправлен",
     "account_activation_failure": "Этот аккаунт был ранее активирован или токен больше не действителен",
     "account_activation_success": "Акаунт активирован",
-    "validation_failure": "Ошибка проверки"
+    "validation_failure": "Ошибка проверки",
+    "user_not_found": "Пользователь не был найден"
 }

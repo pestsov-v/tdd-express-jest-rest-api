@@ -5,6 +5,7 @@ const emailService = require('../email/emailService');
 const sequelize = require('../config/database');
 const emailException = require('../email/emailException');
 const invalidTokenException = require('../user/invalidTokenException');
+const userNotFoundException = require('./userNotFoundException');
 
 const generateToken = (length) => {
   return crypto.randomBytes(length).toString('hex').substring(0, length);
@@ -59,4 +60,20 @@ const getUsers = async (page) => {
   };
 };
 
-module.exports = { save, findByEmail, activate, getUsers };
+const getUser = async (id) => {
+  const user = await User.findOne({
+    where: {
+      id: id,
+      inactive: false,
+    },
+    attributes: ['id', 'username', 'email'],
+  });
+
+  if (!user) {
+    throw new userNotFoundException();
+  }
+
+  return user;
+};
+
+module.exports = { save, findByEmail, activate, getUsers, getUser };
