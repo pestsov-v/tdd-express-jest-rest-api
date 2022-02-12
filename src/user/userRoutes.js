@@ -60,7 +60,12 @@ router.post('/api/v1/users/token/:token', async (req, res, next) => {
 });
 
 router.get('/api/v1/users', async (req, res) => {
-  const users = await userService.getUsers();
+  let page = req.query.page ? Number.parseInt(req.query.page) : 0;
+
+  if (page < 0) {
+    page = 0;
+  }
+  const users = await userService.getUsers(page);
 
   res.send(users);
 });
