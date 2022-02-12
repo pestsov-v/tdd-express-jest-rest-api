@@ -3,6 +3,7 @@ const router = express.Router();
 const userService = require('./userService');
 const { check, validationResult } = require('express-validator');
 const validationException = require('../error/validationException');
+const userNotFoundException = require('./userNotFoundException');
 
 router.post(
   '/api/v1/users',
@@ -60,9 +61,23 @@ router.post('/api/v1/users/token/:token', async (req, res, next) => {
 });
 
 router.get('/api/v1/users', async (req, res) => {
-  const users = await userService.getUsers();
+  let page = req.query.page ? Number.parseInt(req.query.page) : 0;
+
+  if (page < 0) {
+    page = 0;
+  }
+  const users = await userService.getUsers(page);
 
   res.send(users);
+});
+
+router.get('/api/v1/users/:id', async (req, res, next) => {
+  try {
+    const user = await userService.getUser(req.params.id);
+    res.send(user);
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;
