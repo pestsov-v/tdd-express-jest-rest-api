@@ -49,6 +49,7 @@ const getUsers = async () => {
     attributes: ['id', 'username', 'email'],
     limit: pageSize,
   });
+
   return {
     content: usersWithCount.rows,
     page: 0,
