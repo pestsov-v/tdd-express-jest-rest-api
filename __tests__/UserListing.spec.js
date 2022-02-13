@@ -2,13 +2,15 @@ const request = require('supertest');
 const app = require('../src/app');
 const User = require('../src/user/userModel');
 const sequelize = require('../src/config/database');
+const en = require('../locales/en/translation.json');
+const ru = require('../locales/ru/translation.json');
 
 beforeAll(async () => {
   await sequelize.sync();
 });
 
-beforeEach(() => {
-  return User.destroy({ truncate: true });
+beforeEach(async () => {
+  await User.destroy({ truncate: true });
 });
 
 const getUsers = () => {
@@ -120,8 +122,8 @@ describe('Get user', () => {
 
   it.each`
     language | message
-    ${'ru'}  | ${'Пользователь не был найден'}
-    ${'en'}  | ${'User not found'}
+    ${'ru'}  | ${ru.user_not_found}
+    ${'en'}  | ${en.user_not_found}
   `('returns $message for unkonw when language is set to $language', async ({ language, message }) => {
     const response = await getUser().set('Accept-Language', language);
     expect(response.body.message).toBe(message);
