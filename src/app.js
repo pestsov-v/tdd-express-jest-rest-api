@@ -1,6 +1,6 @@
 const express = require('express');
 const userRoute = require('../src/user/userRoutes');
-const AuthRoute = require('../src/auth/AuthentificationRoutes');
+const AuthRoute = require('./auth/authentificationRoutes');
 const i18next = require('i18next');
 const backend = require('i18next-fs-backend');
 const middleware = require('i18next-http-middleware');
