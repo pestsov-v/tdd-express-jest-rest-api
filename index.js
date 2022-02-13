@@ -7,6 +7,7 @@ const addUsers = async (activeUserCount, inactiveUserAcount = 0) => {
     await User.create({
       username: `user${i + 1}`,
       email: `user${i + 1}@gmail.com`,
+      password: 'P4ssword',
       inactive: i >= activeUserCount,
     });
   }
