@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../user/userService');
 const AuthentificationException = require('./authentificationException');
-const forbiddenException = require('./forbiddenException');
+const forbiddenException = require('../error/forbiddenException');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 
