@@ -14,5 +14,6 @@
     "validation_failure": "Ошибка проверки",
     "user_not_found": "Пользователь не был найден",
     "authentification_failure": "Некорректные учётные данные",
-    "inactive_authentification_failure": "Аккаунт не действительный"
+    "inactive_authentification_failure": "Аккаунт не действительный",
+    "unauthorized_user_update": "Чтобы обновить профиль необходимо авторизоватся"
 }
